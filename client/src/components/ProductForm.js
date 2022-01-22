@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-const ProductForm = () => {
+
+const ProductForm = (props) => {
+    const {products, setProducts} = props;
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("")
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('http://192.168.0.4:8000/api/products', {
+        axios.post('/api/products', {
             title,
             price,
             description,
@@ -14,9 +16,7 @@ const ProductForm = () => {
             .then(res => {
                 console.log(res)
                 console.log(res.data)
-                setPrice("")
-                setTitle("")
-                setDescription("")
+                setProducts([...products, res.data]);
             })
             .catch(err => console.log(err))
     }
@@ -38,4 +38,6 @@ const ProductForm = () => {
         </form>
     )
 }
+
+
 export default ProductForm;
