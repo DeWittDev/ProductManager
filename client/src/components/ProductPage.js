@@ -6,7 +6,7 @@ const ProductPage = (props) => {
     const [product, setProduct] = useState({});
     
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/products/${id}`)
+        axios.get(`/api/products/${id}`)
             .then((res)=>{console.log(res.data); setProduct(res.data);})
             .catch((err)=>{console.log(err);})
     }, [])

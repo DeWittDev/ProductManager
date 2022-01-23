@@ -4,7 +4,7 @@ const app = express();
 const port = 8000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({origin:"*"}));
+app.use(cors());
 require('./config/mongoose.config');
 require('./routes/product.routes')(app);
 
