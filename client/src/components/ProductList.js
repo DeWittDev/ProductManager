@@ -11,6 +11,15 @@ const ProductList = (props) => {
         .catch((err) => {console.log(err);})
     }, [])
 
+    const deleteProduct = (routeId) => {
+        axios.delete(`/api/products/${routeId}`)
+            .then(res => {
+                const productList = products.filter((product, index) => product._id !== routeId)
+                setProducts(productList)
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
         <div>
             {products.map((product, index) => {return (
@@ -18,7 +27,7 @@ const ProductList = (props) => {
                 <h3>{product.title}</h3><br/>
                 <Link to={`/api/products/${product._id}`}>Details </Link>
                 <Link to={`/api/update/${product._id}`}>Edit </Link>
-                <Link to={`/api/delete/${product._id}`}>Delete</Link>
+                <button onClick={() => deleteProduct(product._id)}>Delete</button>
             </div>
             )})}
         </div>

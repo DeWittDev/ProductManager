@@ -20,3 +20,8 @@ module.exports.updateProduct = (req, res) => {
         .then(productUpdate => res.json(productUpdate))
         .catch(err => res.json(err))
 }
+module.exports.deleteProduct = (req, res) => {
+    Product.deleteOne({_id: req.params.id})
+        .then(lessProduct => res.json(lessProduct))
+        .catch(err => res.json(err))
+}
